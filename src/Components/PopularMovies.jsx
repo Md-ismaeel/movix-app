@@ -121,9 +121,9 @@ export const PopularMovies = () => {
                             </SkeletonTheme>
                         ) : (
                             popularMovie.map((item) => (
-                                <div key={item.id} className="w-full flex justify-start min-h-screen px-2 mb-10">
+                                <div key={item.id} className='w-full h-[500px] px-2'>
                                     <NavLink
-                                        to={`/movieDetails/${item.id}`}
+                                        to={`/${switchMovie}/${item.id}`}
                                         className="w-1/4 h-40"
                                     >
                                         <MovieCard item={item} />

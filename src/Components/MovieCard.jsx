@@ -2,9 +2,13 @@ import React from 'react'
 import noPosterPng from "../assets/moviesImages/no-poster.png"
 import 'react-circular-progressbar/dist/styles.css';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import { useDispatch, useSelector } from 'react-redux'
+
 
 const MovieCard = ({ item }) => {
+
     const {
+        genre_ids,
         poster_path,
         title,
         name,
@@ -13,7 +17,14 @@ const MovieCard = ({ item }) => {
         vote_average
     } = item;
 
+    const { genres } = useSelector((state) => state.MovieSlice)
 
+    const filteredGenres = genre_ids.map(genresId => {
+        const matchedGenre = genres.find(genre => genre.value === genresId);
+        return matchedGenre ? matchedGenre.label : null;
+    }).filter(Boolean)
+
+    let slicedGenres = filteredGenres.slice(0, 1)
 
     const getBorderColor = () => {
         let vote = Math.round(vote_average);
@@ -58,6 +69,17 @@ const MovieCard = ({ item }) => {
                             backgroundColor: 'transparent',
                         })}
                     />
+                </div>
+
+                <div>
+
+                    <div style={{ display: "flex", flexDirection: 'column', gap: '5px', position: 'absolute', right: "2px", bottom: '80px', marginTop: '10px' }}>
+                        {slicedGenres.map((e, i) => (
+                            <p key={i} className='bg-pink-700 text-white px-2 py-1 rounded-sm text-xs flex'>{e}</p>
+                        ))}
+
+                    </div>
+
                 </div>
 
                 <div className='relative text-white'>

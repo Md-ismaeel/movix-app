@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchApi } from '../utils/api'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTopRated } from '../Slice/MovieSlice'
-import  MovieCard  from './MovieCard'
+import MovieCard from './MovieCard'
 import { NavLink } from 'react-router-dom'
 import ReactSimplyCarousel from 'react-simply-carousel';
 import { FaLongArrowAltLeft } from "react-icons/fa";
@@ -112,7 +112,7 @@ export const TopRatedMovies = () => {
             responsiveProps={[
               {
                 itemsToShow: 5,
-                itemsToScroll: 2,
+                itemsToScroll: 5,
                 minWidth: 768,
               },
             ]}
@@ -123,8 +123,8 @@ export const TopRatedMovies = () => {
               <Skeleton count={5} height={200} width={150} />
             ) : (
               topRated.map((item) => (
-                <div key={item.id} className='w-full min-h-screen px-2'>
-                  <NavLink to={`/movieDetails/${item.id}`} className='w-1/4 h-40'>
+                <div key={item.id} className='w-full h-[500px] px-2'>
+                  <NavLink to={`/${switchMovie}/${item.id}`} className='w-1/4 h-40'>
                     <MovieCard item={item} />
                   </NavLink>
                 </div>

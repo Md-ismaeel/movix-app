@@ -6,7 +6,9 @@ const initialState = {
     trending: [],
     popular: [],
     topRated: [],
-    genres: []
+    genres: [],
+    movieDetail: {},
+    credits: []
 };
 
 const MovieSlice = createSlice({
@@ -15,6 +17,9 @@ const MovieSlice = createSlice({
     reducers: {
         setMovie: (state, action) => {
             state.movie = action.payload;
+        },
+        setTvShows: (state, action) => {
+            state.tvShows = action.payload;
         },
         SetTrending: (state, action) => {
             state.trending = action.payload;
@@ -27,9 +32,15 @@ const MovieSlice = createSlice({
         },
         setGenres: (state, action) => {
             state.genres = action.payload
+        },
+        setMovieDetails: (state, action) => {
+            state.movieDetail = action.payload;
+        },
+        setCredits: (state, action) => {
+            state.credits = action.payload
         }
     },
 });
 
-export const { setMovie, SetTrending, setPopular, setTopRated, setGenres } = MovieSlice.actions;
+export const { setMovie, setTvShows, SetTrending, setPopular, setTopRated, setGenres, setMovieDetails, setCredits } = MovieSlice.actions;
 export default MovieSlice.reducer;

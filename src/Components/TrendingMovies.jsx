@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { fetchApi } from '../utils/api'
 import { useDispatch, useSelector } from 'react-redux'
 import { SetTrending } from '../Slice/MovieSlice'
-import MovieCard from './MovieCard'
 import { NavLink } from 'react-router-dom'
-import ReactSimplyCarousel from 'react-simply-carousel';
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import Skeleton from 'react-loading-skeleton'
+import ReactSimplyCarousel from 'react-simply-carousel';
+import MovieCard from './MovieCard'
 
 export const TrendingMovies = () => {
 
@@ -26,8 +26,6 @@ export const TrendingMovies = () => {
                     Authorization: `Bearer ${import.meta.env.VITE_APP_TOKEN}`,
                 },
             })
-
-        // console.log(response);
         dispatch(SetTrending(response.data.results))
         setIsLoading(false)
     }
@@ -121,8 +119,8 @@ export const TrendingMovies = () => {
                             <Skeleton count={5} height={200} width={150} />
                         ) : (
                             trendingMovie.map((item) => (
-                                <div key={item.id} className='w-full min-h-screen px-2'>
-                                    <NavLink to={`/movieDetails/${item.id}`} className='w-1/4 h-40'>
+                                <div key={item.id} className='w-full h-[500px] px-2'>
+                                    <NavLink to={`/movie/${item.id}`} className='w-1/4 h-40'>
                                         <MovieCard item={item} />
                                     </NavLink>
                                 </div>

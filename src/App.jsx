@@ -12,9 +12,10 @@ const routes = createBrowserRouter([
 
     children: [
       { path: "/", element: <Home /> },
-      { path: "/movies", element: <Movies /> },
-      { path: "/tvShows", element: <TvShows /> },
-      { path: "/movieDetails/:id", element: <MovieDetails /> }
+      { path: "movies", element: <Movies /> },
+      { path: "tvShows", element: <TvShows /> },
+      { path: "movie/:id", element: <MovieDetails /> },
+      { path: "tv/:id", element: <MovieDetails /> }
     ]
   }
 ])
