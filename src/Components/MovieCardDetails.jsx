@@ -20,9 +20,6 @@ export const MovieCardDetails = () => {
         original_name,
     } = movieDetail;
 
-    // console.log(movieDetail);
-    console.log(credits);
-
     const filteredDirector = credits.crew && credits.crew.filter((e) => (e.department === 'Directing'))
 
     const filteredWriter = credits.crew && credits.crew.filter((e) => (e.department === 'Writing'))
@@ -30,9 +27,9 @@ export const MovieCardDetails = () => {
 
     return (
         <>
-            <div className="w-full min-h-screen">
+            <div className={`w-full min-h-screen bg-[${backdrop_path}]`}>
                 {movieDetail ? (
-                    <div className="w-full h-full flex px-10 mt-20">
+                    <div className="w-full h-full flex px-0 mt-20">
 
                         <div className="w-2/5 h-[550px] px-12">
                             <img
@@ -61,6 +58,7 @@ export const MovieCardDetails = () => {
                                     <p key={i}>{e.name}</p>
                                 ))}
                             </div>
+                            <p>{vote_average}</p>
                             <p>Overview: {overview}</p>
 
                             <div className="flex mt-6">
@@ -69,55 +67,28 @@ export const MovieCardDetails = () => {
                                 <p>Runtime: {runtime}</p>
                             </div>
 
-                            {credits.crew ? (
-                                <div className="w-full flex flex-col">
+                            {credits.crew && credits.crew.length !== 0 ? (
+                                <div className="w-full flex">
 
                                     {filteredDirector ?
-                                        <p className="mb-4">Director: {filteredDirector ? filteredDirector[0].name : ''}</p> : ''
+                                        <p className="mb-4">Director: {filteredDirector ? filteredDirector[0]?.name : ''}</p> : ''
                                     }
                                     <hr />
 
-                                    <div className="w-full flex ">
-                                        {/* {filteredWriter && filteredWriter.map((e, i) => (
-                                            <p key={i} className="">{e.name}</p>
-                                        ))} */}
-                                        Writer:
-
-                                        <p>{filteredWriter ? filteredWriter[0].name : ''}</p>
-                                        <p>{filteredWriter ? filteredWriter[1].name : ''}</p>
-                                        <p>{filteredWriter ? filteredWriter[2].name : ''}</p>
+                                    <div className="w-full flex ">Writer:
+                                        {filteredWriter && filteredWriter.map((e, i) => (
+                                            <p key={i} className=""> {e.name}</p>
+                                        ))}
                                     </div>
                                     <hr />
 
                                 </div>
                             ) : (
-                                ""
+                                <div>
+                                    Creator: {credits.cast && credits.cast.map((elem, index) => (<p key={index}>{elem.name}</p>))}
+                                </div>
                             )
                             }
-
-                            {/* {!credits.crew && credits.cast && (
-                                <div>
-                                    <p>Creator:</p>
-                                    {credits.cast.map((actor, index) => (
-                                        <p key={index}>{actor.name}</p>
-                                    ))}
-                                </div>
-                            )}
-
-                            {!credits.cast && credits.crew && (<div>
-                                {filteredDirector && (
-                                    <p>Director: {filteredDirector.name}</p>
-                                )}
-                                <hr />
-                                <div className="w-full flex ">
-                                    {filteredWriter.map((writer, index) => (
-                                        <p key={index}>Writer: {writer.name}</p>
-                                    ))}
-                                </div>
-                                <hr />
-                            </div>)} */}
-
-
                         </div>
 
                     </div>
@@ -128,5 +99,3 @@ export const MovieCardDetails = () => {
         </>
     );
 };
-
-

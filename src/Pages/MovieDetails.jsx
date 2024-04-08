@@ -5,6 +5,7 @@ import { setMovieDetails, setCredits } from '../Slice/MovieSlice'
 import { fetchApi } from '../utils/api'
 import { MovieCardDetails } from '../Components/MovieCardDetails'
 import { useLocation } from 'react-router-dom'
+import Profile from '../Components/Profile'
 
 
 export const MovieDetails = () => {
@@ -59,8 +60,9 @@ export const MovieDetails = () => {
     }, [location[1]])
 
     return (
-        <div className='text-white'>
+        <div className='text-white w-full flex flex-col'>
             <MovieCardDetails />
+            <Profile />
         </div>
     )
 }

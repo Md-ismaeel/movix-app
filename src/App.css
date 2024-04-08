@@ -10,3 +10,7 @@ body {
     overflow-x: hidden;
     /* background-color: cornflowerblue; */
 }
+
+#profile::-webkit-scrollbar {
+    display: none;
+}

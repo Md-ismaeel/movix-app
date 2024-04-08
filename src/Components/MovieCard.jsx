@@ -27,7 +27,7 @@ const MovieCard = ({ item }) => {
     let slicedGenres = filteredGenres.slice(0, 1)
 
     const getBorderColor = () => {
-        let vote = Math.round(vote_average);
+        let vote = (vote_average);
         if (vote >= 7) {
             return 'border-green-500';
         } else if (vote >= 5) {
@@ -59,11 +59,7 @@ const MovieCard = ({ item }) => {
                             strokeLinecap: 'butt',
                             textSize: '24px',
                             pathTransitionDuration: 0.5,
-                            // pathColor: `
-                            // rgba(62, 152, 199, ${(Math.trunc(Number(vote_average) * 100) / 100)})
-                            // `,
                             border: `2px solid ${getBorderColor()}`,
-                            pathColor: `${getBorderColor()}`,
                             textColor: '#f88',
                             trailColor: '#d6d6d6',
                             backgroundColor: 'transparent',
@@ -84,7 +80,7 @@ const MovieCard = ({ item }) => {
 
                 <div className='relative text-white'>
                     <h1 className='text-xl mt-4'>{(title || name).length >= 20 ? (title || name).slice(0, 20) + "..." : title || name}</h1>
-                    <p className='mt-1 opacity-60'>{release_date || first_air_date}</p>
+                    <p className='mt-1 opacity-60 text-sm'>{release_date || first_air_date}</p>
                 </div>
             </div>
 

@@ -139,7 +139,8 @@ export const Movies = () => {
                         className='bg-search-bar h-10 w-2/6 rounded-full outline-none'
                         type='text' value={selectedBySortOption}
                         onChange={(e) => { SetSelectedBySortOption(e) }}
-                        options={sortBy}>
+                        options={sortBy}
+                    >
                     </Select>
 
                 </div>
