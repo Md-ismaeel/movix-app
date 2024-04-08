@@ -8,6 +8,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import Skeleton from 'react-loading-skeleton'
 import ReactSimplyCarousel from 'react-simply-carousel';
 import MovieCard from './MovieCard'
+import { useLocation } from "react-router-dom";
 
 export const TrendingMovies = () => {
 
@@ -16,6 +17,9 @@ export const TrendingMovies = () => {
     const [switchMovie, setSwitchMovies] = useState('day')
     const [activeSlideIndex, setActiveSlideIndex] = useState(0);
     const [isLoading, setIsLoading] = useState(false)
+
+    // const [isActive, setIsActive] = useState(true);
+    // const location = useLocation()
 
     const FetchData = async () => {
         setIsLoading(true)
@@ -34,6 +38,7 @@ export const TrendingMovies = () => {
         FetchData()
     }, [switchMovie])
 
+
     // console.log(trendingMovie);
     return (
         <div className='w-full flex flex-col justify-center items-center py-2 px-6'>
@@ -41,9 +46,9 @@ export const TrendingMovies = () => {
             <div className='w-full text-white flex justify-between px-6'>
                 <h1 className='text-xl font-semibold'>Trending</h1>
 
-                <div className='w-1/6 flex gap-3 bg-white text-slate-800 justify-between px-6 py-1 rounded-full'>
-                    <button onClick={() => setSwitchMovies('day')}>day</button>
-                    <button onClick={() => setSwitchMovies('week')}>week</button>
+                <div className='w-1/5 flex gap-3 bg-white text-slate-800 justify-between px-2 py-1 rounded-full'>
+                    <button onClick={() => setSwitchMovies('day')} className={switchMovie === 'day' ? 'bg-button-gradient px-6 rounded-full' : 'ml-2'}>day</button>
+                    <button onClick={() => setSwitchMovies('week')} className={switchMovie === 'week' ? 'bg-button-gradient px-6 rounded-full' : 'mr-4'}>week</button>
                 </div>
 
             </div>

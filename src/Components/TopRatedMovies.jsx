@@ -45,9 +45,9 @@ export const TopRatedMovies = () => {
       <div className='w-full text-white flex justify-between px-6'>
         <h1 className='text-xl font-semibold'>TopRated</h1>
 
-        <div className='w-1/6 flex gap-3 bg-white text-slate-800 justify-between px-6 py-1 rounded-full'>
-          <button onClick={() => setSwitchMovies('movie')}>Movie</button>
-          <button onClick={() => setSwitchMovies('tv')}>TV Shows</button>
+        <div className='w-1/5 flex gap-3 bg-white text-slate-800 justify-between px-2 py-1 rounded-full'>
+          <button onClick={() => setSwitchMovies('movie')} className={switchMovie === 'movie' ? 'bg-button-gradient px-6 rounded-full' : 'ml-2'}>Movie</button>
+          <button onClick={() => setSwitchMovies('tv')} className={switchMovie === 'tv' ? 'bg-button-gradient px-6 rounded-full' : 'mr-4'}>TV Shows</button>
         </div>
 
       </div>

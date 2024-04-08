@@ -2,7 +2,7 @@ import React from 'react'
 import noPosterPng from "../assets/moviesImages/no-poster.png"
 import 'react-circular-progressbar/dist/styles.css';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 
 const MovieCard = ({ item }) => {

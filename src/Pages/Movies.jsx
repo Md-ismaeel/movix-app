@@ -120,7 +120,7 @@ export const Movies = () => {
 
     // console.log(genres);
     return (
-        <div className='w-full flex flex-col justify-center py-4 px-6'>
+        <div className='w-full flex flex-col justify-center py-4 px-6 mt-20'>
 
             <div className='w-full flex justify-between items-center mt-4 mb-1 px-3'>
                 <h1 className='w-2/12 text-2xl text-white'>Explore Movies</h1>

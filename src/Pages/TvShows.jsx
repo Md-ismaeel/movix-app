@@ -87,7 +87,7 @@ export const TvShows = () => {
                 },
             }
         );
-        dispatch(setMovie(data.data.results));
+        dispatch(setTvShows(data.data.results));
         setTotalPage(data.data.total_pages);
     }
 
@@ -104,7 +104,7 @@ export const TvShows = () => {
                 },
             }
         );
-        dispatch(setMovie(data.data.results));
+        dispatch(setTvShows(data.data.results));
         setTotalPage(data.data.total_pages);
     }
 
@@ -120,9 +120,9 @@ export const TvShows = () => {
         ; console.log(selectedBySortOption);
     }, [selectedOption, selectedBySortOption]);
 
-    console.log(genres);
+    // console.log(genres);
     return (
-        <div className='w-full flex flex-col justify-center py-4 px-6'>
+        <div className='w-full flex flex-col justify-center py-4 px-6 mt-20'>
 
             <div className='w-full flex justify-between items-center mt-4 mb-1 px-3'>
                 <h1 className='w-2/12 text-2xl text-white'>Explore Tv Shows</h1>
