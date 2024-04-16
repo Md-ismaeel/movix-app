@@ -16,7 +16,7 @@ export const Movies = () => {
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(false)
     const [page, setPage] = useState(1);
-    const [totalPage, setTotalPage] = useState(2);
+    const [totalPage, setTotalPage] = useState(5);
     const [selectedOption, setSelectedOption] = useState(null);
     const [selectedBySortOption, SetSelectedBySortOption] = useState(null);
 

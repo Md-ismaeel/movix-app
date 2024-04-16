@@ -8,7 +8,7 @@
 body {
     background-color: rgb(4, 21, 45);
     overflow-x: hidden;
-    /* background-color: cornflowerblue; */
+    background-color: linear-gradient(rgb(0, 37, 88))
 }
 
 #profile::-webkit-scrollbar {

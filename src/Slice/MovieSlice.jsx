@@ -8,7 +8,10 @@ const initialState = {
     topRated: [],
     genres: [],
     movieDetail: {},
-    credits: []
+    credits: [],
+    videos: [],
+    similarMovies: [],
+    recommendations: []
 };
 
 const MovieSlice = createSlice({
@@ -38,9 +41,30 @@ const MovieSlice = createSlice({
         },
         setCredits: (state, action) => {
             state.credits = action.payload
+        },
+        setVideos: (state, action) => {
+            state.videos = action.payload;
+        },
+        setSimilarMovies: (state, action) => {
+            state.similarMovies = action.payload;
+        },
+        setRecommendations: (state, action) => {
+            state.recommendations = action.payload;
         }
     },
 });
 
-export const { setMovie, setTvShows, SetTrending, setPopular, setTopRated, setGenres, setMovieDetails, setCredits } = MovieSlice.actions;
+export const {
+    setMovie,
+    setTvShows,
+    SetTrending,
+    setPopular,
+    setTopRated,
+    setGenres,
+    setMovieDetails,
+    setCredits,
+    setVideos,
+    setSimilarMovies,
+    setRecommendations
+} = MovieSlice.actions;
 export default MovieSlice.reducer;

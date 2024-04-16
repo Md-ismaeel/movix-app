@@ -46,93 +46,91 @@ export const TopRatedMovies = () => {
         <h1 className='text-xl font-semibold'>TopRated</h1>
 
         <div className='w-1/5 flex gap-3 bg-white text-slate-800 justify-between px-2 py-1 rounded-full'>
-          <button onClick={() => setSwitchMovies('movie')} className={switchMovie === 'movie' ? 'bg-button-gradient px-6 rounded-full' : 'ml-2'}>Movie</button>
-          <button onClick={() => setSwitchMovies('tv')} className={switchMovie === 'tv' ? 'bg-button-gradient px-6 rounded-full' : 'mr-4'}>TV Shows</button>
+          <button onClick={() => setSwitchMovies('movie')} className={switchMovie === 'movie' ? 'bg-button-gradient px-6 py-1  rounded-full' : 'ml-2'}>Movie</button>
+          <button onClick={() => setSwitchMovies('tv')} className={switchMovie === 'tv' ? 'bg-button-gradient px-6 py-1  rounded-full' : 'mr-4'}>TV Shows</button>
         </div>
 
       </div>
-      <div className="w-full ">
 
-        <div className='w-full relative'>
-          <ReactSimplyCarousel
-            activeSlideIndex={activeSlideIndex}
-            onRequestChange={setActiveSlideIndex}
-            itemsToShow={1}
-            itemsToScroll={1}
-            forwardBtnProps={{
 
-              style: {
-                position: 'absolute',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                alignSelf: 'start',
-                background: 'black',
-                border: 'none',
-                borderRadius: '50%',
-                color: 'white',
-                cursor: 'pointer',
-                fontSize: '20px',
-                height: 30,
-                lineHeight: 1,
-                textAlign: 'center',
-                width: 30,
-                right: '20px',
-                top: '147px',
-                zIndex: '1'
+      <div className='w-full relative'>
+        <ReactSimplyCarousel
+          activeSlideIndex={activeSlideIndex}
+          onRequestChange={setActiveSlideIndex}
+          itemsToShow={1}
+          itemsToScroll={1}
+          forwardBtnProps={{
 
-              },
-              children: <span>{<FaLongArrowAltRight />}</span>,
-            }}
-            backwardBtnProps={{
+            style: {
+              position: 'absolute',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              alignSelf: 'start',
+              background: 'black',
+              border: 'none',
+              borderRadius: '50%',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '20px',
+              height: 30,
+              lineHeight: 1,
+              textAlign: 'center',
+              width: 30,
+              right: '20px',
+              top: '147px',
+              zIndex: '1'
 
-              style: {
-                position: 'absolute',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                alignSelf: 'center',
-                background: 'black',
-                border: 'none',
-                borderRadius: '50%',
-                color: 'white',
-                cursor: 'pointer',
-                fontSize: '20px',
-                height: 30,
-                lineHeight: 1,
-                textAlign: 'center',
-                width: 30,
-                left: '20px',
-                zIndex: '1',
-                top: '147px'
+            },
+            children: <span>{<FaLongArrowAltRight />}</span>,
+          }}
+          backwardBtnProps={{
 
-              },
-              children: <span>{<FaLongArrowAltLeft />}</span>,
-            }}
-            responsiveProps={[
-              {
-                itemsToShow: 5,
-                itemsToScroll: 5,
-                minWidth: 768,
-              },
-            ]}
-            speed={400}
-            easing="linear"
-          >
-            {isLoading ? (
-              <Skeleton count={5} height={200} width={150} />
-            ) : (
-              topRated.map((item) => (
-                <div key={item.id} className='w-full h-[500px] px-2'>
-                  <NavLink to={`/${switchMovie}/${item.id}`} className='w-1/4 h-40'>
-                    <MovieCard item={item} />
-                  </NavLink>
-                </div>
-              )))}
+            style: {
+              position: 'absolute',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              alignSelf: 'center',
+              background: 'black',
+              border: 'none',
+              borderRadius: '50%',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '20px',
+              height: 30,
+              lineHeight: 1,
+              textAlign: 'center',
+              width: 30,
+              left: '20px',
+              zIndex: '1',
+              top: '147px'
 
-          </ReactSimplyCarousel>
-        </div>
+            },
+            children: <span>{<FaLongArrowAltLeft />}</span>,
+          }}
+          responsiveProps={[
+            {
+              itemsToShow: 5,
+              itemsToScroll: 5,
+              minWidth: 768,
+            },
+          ]}
+          speed={400}
+          easing="linear"
+        >
+          {isLoading ? (
+            <Skeleton count={5} height={200} width={150} />
+          ) : (
+            topRated.map((item) => (
+              <div key={item.id} className='w-full h-[500px] px-2'>
+                <NavLink to={`/${switchMovie}/${item.id}`} className='w-1/4 h-40'>
+                  <MovieCard item={item} />
+                </NavLink>
+              </div>
+            )))}
 
+        </ReactSimplyCarousel>
       </div>
     </div>
   )

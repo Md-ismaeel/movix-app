@@ -26,40 +26,25 @@ const MovieCard = ({ item }) => {
 
     let slicedGenres = filteredGenres.slice(0, 1)
 
-    const getBorderColor = () => {
-        let vote = (vote_average);
-        if (vote >= 7) {
-            return 'border-green-500';
-        } else if (vote >= 5) {
-            return 'border-yellow-500';
-        } else {
-            return 'border-red-500';
-        }
-    };
-
+    const formattedVoteAverage = typeof vote_average === 'number' ? vote_average.toFixed(1) : 'N/A';
 
     return (
         <>
 
-            <div className='min-w-56 rounded-md mt-4 mb-10 relative'>
-                {poster_path ? (
+            <div className='min-w-56 rounded-md mt-4 mb-10 relative hover:opacity-50 ease-linear duration-300'>
 
-                    <img src={`https://image.tmdb.org/t/p/original/${poster_path}`} className='w-full min-h-60 rounded-xl mb-1' alt={title || name} />
-                ) : (
-                    <img src={noPosterPng} className='w-full min-h-60 rounded-xl mb-1' alt='notImages' />
-                )}
+                <img src={poster_path ? `https://image.tmdb.org/t/p/original/${poster_path}` : noPosterPng} alt={title || name || 'No Poster'} className='w-full min-h-60 rounded-xl mb-1' />
 
                 <div style={{ background: 'white', borderRadius: '50%', width: '48px', height: '48px', position: 'absolute', left: '8px', bottom: '70px', right: '2px' }}>
                     <CircularProgressbar
-                        className='h-12 w-12'
+                        className='h-full w-full'
                         value={Math.trunc(Number(vote_average) * 10)}
-                        text={`${vote_average.toFixed(1)}%`}
+                        text={`${formattedVoteAverage}%`}
                         styles={buildStyles({
                             rotation: 0.25,
                             strokeLinecap: 'butt',
                             textSize: '24px',
                             pathTransitionDuration: 0.5,
-                            border: `2px solid ${getBorderColor()}`,
                             textColor: '#f88',
                             trailColor: '#d6d6d6',
                             backgroundColor: 'transparent',

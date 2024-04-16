@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { setMovieDetails, setCredits } from '../Slice/MovieSlice'
 import { fetchApi } from '../utils/api'
 import { MovieCardDetails } from '../Components/MovieCardDetails'
 import { useLocation } from 'react-router-dom'
 import Profile from '../Components/Profile'
+import { OfficialVideos } from '../Components/OfficialVideos'
+import { SimilarMoviesData } from '../Components/SimilarVideosData'
+
+import {
+    setMovieDetails,
+    setCredits,
+    setVideos,
+    setSimilarMovies,
+    setRecommendations
+} from '../Slice/MovieSlice'
+import { Recommendation } from '../Components/Recommendation'
 
 
 export const MovieDetails = () => {
@@ -17,6 +27,7 @@ export const MovieDetails = () => {
 
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(false)
+
 
     const fetchMovieData = async () => {
 
@@ -48,21 +59,74 @@ export const MovieDetails = () => {
         setIsLoading(false)
     }
 
+    const FetchVideosData = async () => {
+        setIsLoading(true)
+
+        const response = await fetchApi(`https://api.themoviedb.org/3/${location[1]}/${id}/videos`,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${import.meta.env.VITE_APP_TOKEN}`,
+                },
+            }
+        );
+        dispatch(setVideos(response.data.results))
+        // console.log(response.data.results);
+    }
+
+    const FetchSimilarMovies = async () => {
+
+        const response = await fetchApi(`https://api.themoviedb.org/3/${location[1]}/${id}/similar`, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${import.meta.env.VITE_APP_TOKEN}`,
+            },
+        })
+        // console.log(response.data.results);
+        dispatch(setSimilarMovies(response.data.results))
+    }
+
+
+    const FetchRecommendation = async () => {
+
+        const response = await fetchApi(`
+        https://api.themoviedb.org/3/${location[1]}/${id}/recommendations`, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${import.meta.env.VITE_APP_TOKEN}`,
+            },
+        })
+        console.log(response.data.results);
+        dispatch(setRecommendations(response.data.results))
+    }
+
+
+
     useEffect(() => {
+        console.log('newMovies', location[1]);
         fetchMovieData()
         fetchCreditData()
+        FetchVideosData()
+        FetchSimilarMovies()
+        FetchRecommendation()
 
         return () => {
             dispatch(setMovieDetails({}))
             dispatch(setCredits([]))
+            dispatch(setVideos([]))
+            dispatch(setSimilarMovies([]))
+            dispatch(setRecommendations([]))
 
         }
-    }, [location[1]])
+    }, [id])
 
     return (
         <div className='text-white w-full flex flex-col'>
             <MovieCardDetails />
             <Profile />
+            <OfficialVideos />
+            <SimilarMoviesData />
+            <Recommendation />
         </div>
     )
 }

@@ -10,7 +10,8 @@ export const Header = () => {
     return (
         <div className='w-full h-[700px] text-white' style={{
             backgroundImage: randomImg ? `linear-gradient(rgba(0,0,0,0.5), rgb(4, 21, 45)), url(https://image.tmdb.org/t/p/original${randomImg})` : '',
-            backgroundPosition: 'center'
+            backgroundPosition: 'center',
+            backgroundSize: 'cover'
         }}>
             <div className={`w-full min-h-screen flex flex-col justify-center items-center gap-3`}>
 

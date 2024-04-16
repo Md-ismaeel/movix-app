@@ -12,7 +12,7 @@ const Profile = () => {
         character: elem.character
     })) : [];
 
-    console.log(filteringData);
+    // console.log(filteringData);
 
     return (
 

@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import noPosterImg from "../assets/moviesImages/no-poster.png";
+import 'react-circular-progressbar/dist/styles.css';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import { CiPlay1 } from "react-icons/ci";
+import { NavLink } from "react-router-dom";
+import ReactPlayer from 'react-player/lazy'
 
 export const MovieCardDetails = () => {
     const { movieDetail, credits } = useSelector((state) => state.MovieSlice);
@@ -24,12 +29,18 @@ export const MovieCardDetails = () => {
 
     const filteredWriter = credits.crew && credits.crew.filter((e) => (e.department === 'Writing'))
 
+    const formattedVoteAverage = typeof vote_average === 'number' ? vote_average.toFixed(1) : 'N/A';
+
 
     return (
         <>
-            <div className={`w-full min-h-screen bg-[${backdrop_path}]`}>
+            <div className={`w-full min-h-screen`} style={{
+                backgroundImage: backdrop_path ? `linear-gradient(rgba(0,0,0,0.6), rgb(4, 21, 45),rgb(4, 21, 45)), url(https://image.tmdb.org/t/p/original${backdrop_path})` : '',
+                backgroundPosition: 'center',
+                backgroundSize: 'cover'
+            }}>
                 {movieDetail ? (
-                    <div className="w-full h-full flex px-0 mt-20">
+                    <div className="w-full h-full flex px-0 mt-32">
 
                         <div className="w-2/5 h-[550px] px-12">
                             <img
@@ -42,51 +53,115 @@ export const MovieCardDetails = () => {
                         <div className="w-1/2">
 
                             <h1>
-                                <span>{title || original_name}</span>
-                                <span>
-                                    {(release_date || first_air_date) &&
-                                        (release_date || first_air_date).length >= 4
-                                        ? `(${(release_date || first_air_date).slice(0, 4)})`
-                                        : ""}
+                                <span className='text-4xl'>{title || original_name}</span>{" "}
+
+                                <span className="text-4xl">
+                                    {(release_date || first_air_date) && (release_date || first_air_date).length >= 4 ? `(${(release_date || first_air_date).slice(0, 4)})` : ""}
                                 </span>
                             </h1>
 
-                            <p>{tagline}</p>
+                            <p className="text-xl italic mt-1 opacity-40">{tagline ? tagline : "N/A"}</p>
 
-                            <div>
+                            <div className="flex justify-start items-center gap-4">
+
                                 {genres && genres.map((e, i) => (
-                                    <p key={i}>{e.name}</p>
+                                    <p key={i} className="bg-pink-700 px-4 rounded-sm mt-2">{e ? e.name : "N/A"}</p>
                                 ))}
-                            </div>
-                            <p>{vote_average}</p>
-                            <p>Overview: {overview}</p>
 
-                            <div className="flex mt-6">
-                                <p>Status: {status}</p>
-                                <p>Release Date: {release_date}</p>
-                                <p>Runtime: {runtime}</p>
                             </div>
+
+
+                            <div className="w-full flex justify-start items-center gap-10 mt-4">
+
+                                <div style={{ background: 'white', borderRadius: '50%', width: '70px', height: '70px' }}>
+                                    <CircularProgressbar
+                                        className='h-full w-full'
+                                        value={Math.trunc(Number(vote_average) * 10)}
+                                        text={`${formattedVoteAverage}%`}
+                                        styles={buildStyles({
+                                            rotation: 0.25,
+                                            strokeLinecap: 'butt',
+                                            textSize: '24px',
+                                            pathTransitionDuration: 0.5,
+                                            textColor: '#f88',
+                                            trailColor: '#d6d6d6',
+                                            backgroundColor: 'transparent',
+                                        })}
+                                    />
+                                </div>
+
+                                <div className="flex justify-start items-center gap-4">
+                                    <NavLink>
+                                        <span className="h-[70px] w-[70px] text-4xl rounded-full relative flex justify-center items-center border-2 hover:border-pink-700 hover:text-pink-700 cursor-pointer">
+                                            <CiPlay1 className="absolute z-2 " />
+                                        </span>
+                                        <ReactPlayer url={`https://www.youtube.com/watch?v=${"elem.key"}`} className='absolute z-10 top-0' />
+                                    </NavLink>
+                                    <span className="text-xl text-white hover:text-pink-700"> Watch trailer</span>
+
+                                </div>
+                            </div>
+
+
+                            <div className="w-full justify-start items-center mt-4">
+
+                                <span className="text-2xl">Overview</span><br />
+                                <span>{overview ? overview : "N/A"}</span>
+
+                            </div>
+
+                            <div className="w-full flex justify-start items-center gap-10 mt-6">
+
+                                <div className="flex justify-center items-center gap-2">
+                                    <span className="text-lg">Status:</span>
+                                    <span className="opacity-50">{status ? status : 'N/A'}</span>
+                                </div>
+
+                                <div className="flex justify-center items-center gap-2">
+                                    <span className="text-lg"></span>Release Date:
+                                    <span className="opacity-50">{release_date ? release_date : ' N/A'}</span>
+                                </div>
+
+                                <div className="flex justify-center items-center gap-2">
+                                    <span className="text-lg">Runtime:</span>
+                                    <span className="opacity-50">{runtime ? `${runtime}m` : 'N/A'}</span>
+                                </div>
+
+                            </div>
+                            <hr className="opacity-20 mt-2" />
 
                             {credits.crew && credits.crew.length !== 0 ? (
-                                <div className="w-full flex">
+                                <div className="w-full flex flex-col">
 
                                     {filteredDirector ?
-                                        <p className="mb-4">Director: {filteredDirector ? filteredDirector[0]?.name : ''}</p> : ''
-                                    }
-                                    <hr />
+                                        <p className="flex justify-start items-center gap-4 mt-4">
 
-                                    <div className="w-full flex ">Writer:
+                                            <span className="text-lg">Director:</span>
+                                            <span className="opacity-50">{filteredDirector ? filteredDirector[0]?.name : 'N/A'}</span>
+
+                                        </p> : ''
+                                    }
+                                    <hr className="opacity-20 mt-2" />
+
+                                    <div className="w-full flex mt-4 gap-3">
+                                        <span>Writer:</span>
                                         {filteredWriter && filteredWriter.map((e, i) => (
-                                            <p key={i} className=""> {e.name}</p>
+                                            <p key={i} className="opacity-50"> {e.name ? e.name : "N/A"}</p>
                                         ))}
                                     </div>
-                                    <hr />
+                                    <hr className="opacity-20 mt-2" />
 
                                 </div>
                             ) : (
-                                <div>
-                                    Creator: {credits.cast && credits.cast.map((elem, index) => (<p key={index}>{elem.name}</p>))}
-                                </div>
+                                <>
+                                    <div className="flex justify-start items-center gap-3 mt-4">
+                                        Creator:
+                                        {credits.cast && credits.cast.map((elem, index) => (<span key={index} className="opacity-50">{elem.name ? elem.name : "N/A"}</span>))}
+
+                                    </div>
+                                    <hr className="opacity-20 mt-2" />
+
+                                </>
                             )
                             }
                         </div>
