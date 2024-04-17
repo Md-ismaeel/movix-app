@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     movie: [],
     tvShows: [],
+    searchInput: [],
     trending: [],
     popular: [],
     topRated: [],
@@ -23,6 +24,9 @@ const MovieSlice = createSlice({
         },
         setTvShows: (state, action) => {
             state.tvShows = action.payload;
+        },
+        setSearchInput: (state, action) => {
+            state.searchInput = action.payload
         },
         SetTrending: (state, action) => {
             state.trending = action.payload;
@@ -57,6 +61,7 @@ const MovieSlice = createSlice({
 export const {
     setMovie,
     setTvShows,
+    setSearchInput,
     SetTrending,
     setPopular,
     setTopRated,

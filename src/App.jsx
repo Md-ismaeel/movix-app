@@ -5,6 +5,7 @@ import { Movies } from './Pages/Movies'
 import { TvShows } from './Pages/TvShows'
 import { ScreenLayout } from './ScreenLayout/ScreenLayout'
 import { MovieDetails } from './Pages/MovieDetails'
+import { SearchResults } from './Pages/SearchResults'
 
 const routes = createBrowserRouter([
   {
@@ -15,7 +16,9 @@ const routes = createBrowserRouter([
       { path: "movies", element: <Movies /> },
       { path: "tvShows", element: <TvShows /> },
       { path: "movie/:id", element: <MovieDetails /> },
-      { path: "tv/:id", element: <MovieDetails /> }
+      { path: "tv/:id", element: <MovieDetails /> },
+      { path: "search/:id", element: <SearchResults /> },
+      // { path: "search/:id", element: <MovieDetails /> },
     ]
   }
 ])

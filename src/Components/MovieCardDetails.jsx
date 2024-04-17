@@ -5,10 +5,10 @@ import 'react-circular-progressbar/dist/styles.css';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { CiPlay1 } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
-import ReactPlayer from 'react-player/lazy'
+import { VideoModal } from "./VideoModel";
 
 export const MovieCardDetails = () => {
-    const { movieDetail, credits } = useSelector((state) => state.MovieSlice);
+    const { movieDetail, credits, videos } = useSelector((state) => state.MovieSlice);
 
     const {
         backdrop_path,
@@ -30,6 +30,18 @@ export const MovieCardDetails = () => {
     const filteredWriter = credits.crew && credits.crew.filter((e) => (e.department === 'Writing'))
 
     const formattedVoteAverage = typeof vote_average === 'number' ? vote_average.toFixed(1) : 'N/A';
+
+
+    const [selectedVideoKey, setSelectedVideoKey] = useState(null);
+    const sliced = videos && videos.length > 1 ? videos.slice(0, 1) : videos;
+
+    const openVideoModal = (videoKey) => {
+        setSelectedVideoKey(videoKey);
+    };
+
+    const closeVideoModal = () => {
+        setSelectedVideoKey(null);
+    };
 
 
     return (
@@ -91,12 +103,15 @@ export const MovieCardDetails = () => {
                                 </div>
 
                                 <div className="flex justify-start items-center gap-4">
-                                    <NavLink>
-                                        <span className="h-[70px] w-[70px] text-4xl rounded-full relative flex justify-center items-center border-2 hover:border-pink-700 hover:text-pink-700 cursor-pointer">
-                                            <CiPlay1 className="absolute z-2 " />
-                                        </span>
-                                        <ReactPlayer url={`https://www.youtube.com/watch?v=${"elem.key"}`} className='absolute z-10 top-0' />
-                                    </NavLink>
+
+                                    {sliced && sliced.map((video) => (
+                                        <NavLink onClick={() => openVideoModal(video.key)}>
+                                            <span className="h-[70px] w-[70px] text-4xl rounded-full relative flex justify-center items-center border-2 hover:border-pink-700 hover:text-pink-700 cursor-pointer">
+                                                <CiPlay1 className="absolute z-2 " />
+                                            </span>
+                                        </NavLink>
+                                    ))}
+
                                     <span className="text-xl text-white hover:text-pink-700"> Watch trailer</span>
 
                                 </div>
@@ -171,6 +186,9 @@ export const MovieCardDetails = () => {
                     ""
                 )}
             </div>
+            {selectedVideoKey && (
+                <VideoModal videoKey={selectedVideoKey} onClose={closeVideoModal} />
+            )}
         </>
     );
 };

@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
     const { trending } = useSelector((state) => state.MovieSlice)
-
     const randomImg = trending && trending.length > 0 ? trending[Math.floor(Math.random() * trending.length)].backdrop_path : '';
     // console.log(randomImg);
+
+    const inputRef = useRef();
+
+    const navigator = useNavigate()
+    const handleSearch = () => {
+        let inputVal = inputRef.current.value.toLowerCase();
+        if (inputVal !== null) {
+            navigator(`/search/${inputVal}`)
+        }
+    }
+
+
 
     return (
         <div className='w-full h-[700px] text-white' style={{
@@ -19,8 +31,8 @@ export const Header = () => {
                 <p className='text-2xl'>Millions of movies, TV shows and people to discover. Explore now.</p>
 
                 <div className='w-full flex justify-center items-center mt-4'>
-                    <input type='text' placeholder='Search for a movie and tv shoes....' className='w-2/4 h-14 rounded-l-full focus:outline-none outline-none px-10 text-xl text-slate-600' />
-                    <button className='w-[120px] bg-button-gradient h-14 rounded-md text-xl rounded-r-full'>search</button>
+                    <input type='text' ref={inputRef} placeholder='Search for a movie and tv shoes....' className='w-2/4 h-14 rounded-l-full focus:outline-none outline-none px-10 text-xl text-slate-600' />
+                    <button onClick={handleSearch} className='w-[120px] bg-button-gradient h-14 rounded-md text-xl rounded-r-full'>search</button>
                 </div>
 
             </div>

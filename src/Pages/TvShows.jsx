@@ -16,7 +16,7 @@ export const TvShows = () => {
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(false)
     const [page, setPage] = useState(1);
-    const [totalPage, setTotalPage] = useState(5);
+    const [totalPage, setTotalPage] = useState(null);
     const [selectedOption, setSelectedOption] = useState(null);
     const [selectedBySortOption, SetSelectedBySortOption] = useState(null);
 
@@ -48,7 +48,7 @@ export const TvShows = () => {
 
 
     async function fetchMoviePerPage() {
-        const data = await fetchApi(
+        const response = await fetchApi(
             `https://api.themoviedb.org/3/discover/tv?page=${page}`,
             {
                 headers: {
@@ -57,15 +57,19 @@ export const TvShows = () => {
                 },
             }
         );
-        const newMovie = [...tvShows, ...data.data.results];
+        const newMovie = [...tvShows, ...response.data.results];
         dispatch(setTvShows(newMovie));
         setPage((prev) => prev + 1);
-        setTotalPage(data.data.total_pages);
+        setTotalPage(response.data.total_pages);
     }
 
     useEffect(() => {
         FetchData();
         fetchMoviePerPage();
+
+        return () => {
+            dispatch(setTvShows([]))
+        }
     }, []);
 
 

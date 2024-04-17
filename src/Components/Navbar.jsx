@@ -9,7 +9,9 @@ const Navbar = () => {
 
         <div className='w-full fixed z-10 top-0 h-16  bg-navbar-color backdrop-blur-sm text-lg text-white flex justify-between items-center  px-20'>
 
-            <NavLink to={"/"}><img src={movieLogo} /></NavLink>
+            <NavLink to={"/"}>
+                <img src={movieLogo} className='w-[150px] h-[50px] bg-cover' />
+            </NavLink>
 
             <ul className='flex gap-6 justify-center items-center text-base'>
 

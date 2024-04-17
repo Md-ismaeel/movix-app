@@ -16,7 +16,7 @@ export const Movies = () => {
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(false)
     const [page, setPage] = useState(1);
-    const [totalPage, setTotalPage] = useState(5);
+    const [totalPage, setTotalPage] = useState(null);
     const [selectedOption, setSelectedOption] = useState(null);
     const [selectedBySortOption, SetSelectedBySortOption] = useState(null);
 
@@ -48,7 +48,7 @@ export const Movies = () => {
 
 
     async function fetchMoviePerPage() {
-        const data = await fetchApi(`https://api.themoviedb.org/3/discover/movie?page=${page}`,
+        const response = await fetchApi(`https://api.themoviedb.org/3/discover/movie?page=${page}`,
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -56,15 +56,19 @@ export const Movies = () => {
                 },
             }
         );
-        const newMovie = [...movie, ...data.data.results];
+        const newMovie = [...movie, ...response.data.results];
         dispatch(setMovie(newMovie));
-        setPage(page + 1);
-        setTotalPage(data.data.total_pages);
+        setPage(prev => prev + 1);
+        setTotalPage(response.data.total_pages);
     }
 
     useEffect(() => {
         FetchData();
         fetchMoviePerPage();
+
+        return () => {
+            dispatch(setMovie([]))
+        }
     }, []);
 
 
