@@ -44,8 +44,8 @@ export const TrendingMovies = () => {
                 <h1 className='text-xl font-semibold'>Trending</h1>
 
                 <div className='w-1/5 flex gap-3 bg-white text-slate-800 justify-between px-2 py-1 rounded-full'>
-                    <button onClick={() => setSwitchMovies('day')} className={switchMovie === 'day' ? 'bg-button-gradient px-6 rounded-full' : 'ml-2'}>day</button>
-                    <button onClick={() => setSwitchMovies('week')} className={switchMovie === 'week' ? 'bg-button-gradient px-6 rounded-full' : 'mr-4'}>week</button>
+                    <button onClick={() => setSwitchMovies('day')} className={switchMovie === 'day' ? 'bg-button-gradient px-8 py-[4px] rounded-full text-white' : 'ml-2'}>day</button>
+                    <button onClick={() => setSwitchMovies('week')} className={switchMovie === 'week' ? 'bg-button-gradient px-8 py-[4px] rounded-full text-white' : 'mr-4'}>week</button>
                 </div>
 
             </div>

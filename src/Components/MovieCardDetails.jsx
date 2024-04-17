@@ -148,23 +148,32 @@ export const MovieCardDetails = () => {
                             {credits.crew && credits.crew.length !== 0 ? (
                                 <div className="w-full flex flex-col">
 
-                                    {filteredDirector ?
-                                        <p className="flex justify-start items-center gap-4 mt-4">
+                                    {filteredDirector.length > 0 ?
+                                        <>
+                                            <p className="flex justify-start items-center gap-4 mt-4">
 
-                                            <span className="text-lg">Director:</span>
-                                            <span className="opacity-50">{filteredDirector ? filteredDirector[0]?.name : 'N/A'}</span>
+                                                <span className="text-lg">Director:</span>
+                                                <span className="opacity-50">{filteredDirector ? filteredDirector[0]?.name : 'N/A'}</span>
+                                                <span className="opacity-50">{filteredDirector ? filteredDirector[1]?.name : 'N/A'}</span>
 
-                                        </p> : ''
+                                            </p>
+                                            < hr className="opacity-20 mt-2" />
+                                        </>
+                                        : ''
                                     }
-                                    <hr className="opacity-20 mt-2" />
 
-                                    <div className="w-full flex mt-4 gap-3">
-                                        <span>Writer:</span>
-                                        {filteredWriter && filteredWriter.map((e, i) => (
-                                            <p key={i} className="opacity-50"> {e.name ? e.name : "N/A"}</p>
-                                        ))}
-                                    </div>
-                                    <hr className="opacity-20 mt-2" />
+                                    {filteredWriter.length > 0 ?
+                                        <>
+                                            <div className="w-full flex mt-4 gap-3">
+                                                <span>Writer:</span>
+
+                                                <p className="opacity-50"> {filteredWriter ? filteredWriter[0]?.name : "N/A"}</p>
+                                                <p className="opacity-50"> {filteredWriter ? filteredWriter[1]?.name : "N/A"}</p>
+
+                                            </div>
+                                            <hr className="opacity-20 mt-2" />
+                                        </> : ''}
+
 
                                 </div>
                             ) : (
