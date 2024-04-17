@@ -41,7 +41,7 @@ export const PopularMovies = () => {
     // console.log(popularMovie);
     return (
         <div className="w-full flex flex-col justify-center items-center py-2 px-6">
-            <div className="w-full text-white flex justify-between px-6">
+            <div className="w-full text-white flex justify-between px-4">
                 <h1 className="text-xl font-semibold">What's Popular</h1>
 
                 <div className="flex w-1/5  gap-3 bg-white text-slate-800 justify-between px-2 py-1 rounded-full">

@@ -25,7 +25,7 @@ export const SimilarMoviesData = () => {
 
     return (
         <div className='w-full relative'>
-            <h1 className='px-12 text-3xl'>{switchMovie === 'movie' ? 'Similar Movies' : 'Similar Tv Shoes'}</h1>
+            <h1 className='px-10 text-3xl'>{switchMovie === 'movie' ? 'Similar Movies' : 'Similar Tv Shoes'}</h1>
 
             <ReactSimplyCarousel
                 activeSlideIndex={activeSlideIndex}

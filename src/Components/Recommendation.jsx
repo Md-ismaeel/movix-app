@@ -25,7 +25,7 @@ export const Recommendation = () => {
         <>
             {recommendations.length > 0 ? (
                 <div className='w-full relative'>
-                    <h1 className='px-12 text-3xl'>Recommendations</h1>
+                    <h1 className='px-10 text-3xl'>Recommendations</h1>
 
                     <ReactSimplyCarousel
                         activeSlideIndex={activeSlideIndex}
