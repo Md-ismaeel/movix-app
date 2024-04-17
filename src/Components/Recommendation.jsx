@@ -22,93 +22,97 @@ export const Recommendation = () => {
     }, [pathname])
 
     return (
-        <div className='w-full relative'>
-            <h1 className='px-12 text-3xl'>Recommendations</h1>
+        <>
+            {recommendations.length > 0 ? (
+                <div className='w-full relative'>
+                    <h1 className='px-12 text-3xl'>Recommendations</h1>
 
-            <ReactSimplyCarousel
-                activeSlideIndex={activeSlideIndex}
-                onRequestChange={setActiveSlideIndex}
-                itemsToShow={1}
-                itemsToScroll={5}
-                forwardBtnProps={{
+                    <ReactSimplyCarousel
+                        activeSlideIndex={activeSlideIndex}
+                        onRequestChange={setActiveSlideIndex}
+                        itemsToShow={1}
+                        itemsToScroll={5}
+                        forwardBtnProps={{
 
-                    style: {
-                        position: 'absolute',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        alignSelf: 'start',
-                        background: 'black',
-                        border: 'none',
-                        borderRadius: '50%',
-                        color: 'white',
-                        cursor: 'pointer',
-                        fontSize: '20px',
-                        height: 30,
-                        lineHeight: 1,
-                        textAlign: 'center',
-                        width: 30,
-                        right: '40px',
-                        top: '200px',
-                        zIndex: '1'
+                            style: {
+                                position: 'absolute',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                alignSelf: 'start',
+                                background: 'black',
+                                border: 'none',
+                                borderRadius: '50%',
+                                color: 'white',
+                                cursor: 'pointer',
+                                fontSize: '20px',
+                                height: 30,
+                                lineHeight: 1,
+                                textAlign: 'center',
+                                width: 30,
+                                right: '40px',
+                                top: '200px',
+                                zIndex: '1'
 
-                    },
-                    children: <span>{<FaLongArrowAltRight />}</span>,
-                }}
-                backwardBtnProps={{
+                            },
+                            children: <span>{<FaLongArrowAltRight />}</span>,
+                        }}
+                        backwardBtnProps={{
 
-                    style: {
-                        position: 'absolute',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        alignSelf: 'center',
-                        background: 'black',
-                        border: 'none',
-                        borderRadius: '50%',
-                        color: 'white',
-                        cursor: 'pointer',
-                        fontSize: '20px',
-                        height: 30,
-                        lineHeight: 1,
-                        textAlign: 'center',
-                        width: 30,
-                        left: '40px',
-                        zIndex: '1',
-                        top: '200px'
+                            style: {
+                                position: 'absolute',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                alignSelf: 'center',
+                                background: 'black',
+                                border: 'none',
+                                borderRadius: '50%',
+                                color: 'white',
+                                cursor: 'pointer',
+                                fontSize: '20px',
+                                height: 30,
+                                lineHeight: 1,
+                                textAlign: 'center',
+                                width: 30,
+                                left: '40px',
+                                zIndex: '1',
+                                top: '200px'
 
-                    },
-                    children: <span>{<FaLongArrowAltLeft />}</span>,
-                }}
-                responsiveProps={[
-                    {
-                        itemsToShow: 5,
-                        itemsToScroll: 5,
-                        minWidth: 768,
-                    },
-                ]}
-                speed={400}
-                easing="linear"
-            >
-                {isLoading ? (
-                    <Skeleton count={5} height={200} width={150} />
+                            },
+                            children: <span>{<FaLongArrowAltLeft />}</span>,
+                        }}
+                        responsiveProps={[
+                            {
+                                itemsToShow: 5,
+                                itemsToScroll: 5,
+                                minWidth: 768,
+                            },
+                        ]}
+                        speed={400}
+                        easing="linear"
+                    >
+                        {isLoading ? (
+                            <Skeleton count={5} height={200} width={150} />
 
-                ) : (
-                    recommendations && recommendations.map((item) => (
-                        <div key={item.id} className='w-full h-[500px] px-2'>
-                            {switchMovie &&
-                                <NavLink to={`/${switchMovie}/${item.id}`} className='w-1/4 h-40'>
-                                    <MovieCard item={item} />
-                                </NavLink>
-                            }
+                        ) : (
+                            recommendations && recommendations.map((item) => (
+                                <div key={item.id} className='w-full h-[500px] px-2'>
+                                    {switchMovie &&
+                                        <NavLink to={`/${switchMovie}/${item.id}`} className='w-1/4 h-40'>
+                                            <MovieCard item={item} />
+                                        </NavLink>
+                                    }
 
-                        </div>
-                    ))
+                                </div>
+                            ))
 
-                )}
+                        )}
 
-            </ReactSimplyCarousel>
-        </div>
+                    </ReactSimplyCarousel>
+                </div>
+            ) : ''}
+        </>
 
     )
 }
